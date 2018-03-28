@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{21432763-8D7E-4B35-9148-4F25AC528FAC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>HyperEditX</AssemblyName>
+    <RootNamespace>HyperEditX</RootNamespace>
+    <MyFileName>$(AssemblyName).dll</MyFileName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <NoConfig>true</NoConfig>
+    <NoStdLib>true</NoStdLib>
+    <KspInstallDir Condition=" '$(KspInstallDir)' == '' ">G:\KSP131.dev</KspInstallDir>
+    <KspOutputPath>$(KspInstallDir)\GameData\Kerbaltek</KspOutputPath>
+    <KspLibPath>$(KspInstallDir)\KSP_x64_Data\Managed</KspLibPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(KspLibPath)\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>$(KspLibPath)\Assembly-CSharp-firstpass.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="UnityEngine">
+      <HintPath>$(KspLibPath)\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>$(KspLibPath)\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="mscorlib">
+      <HintPath>$(KspLibPath)\mscorlib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>$(KspLibPath)\System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="KSPAssets">
+      <HintPath>$(KspLibPath)\KSPAssets.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\About.cs" />
+    <Compile Include="Source\ConfigHelper.cs" />
+    <Compile Include="Source\Core.cs" />
+    <Compile Include="Source\Extensions.cs" />
+    <Compile Include="Source\Lander.cs" />
+    <Compile Include="Source\Misc.cs" />
+    <Compile Include="Source\Orbit.cs" />
+    <Compile Include="Source\Resources.cs" />
+    <Compile Include="Source\Settings.cs" />
+    <Compile Include="Source\UiHelper.cs" />
+    <Compile Include="Source\Utils.cs" />
+    <!--
+    <Compile Include="Source\Model\Lander.cs" />
+    <Compile Include="Source\Model\MiscEditor.cs" />
+    <Compile Include="Source\Model\OrbitEditor.cs" />
+    <Compile Include="Source\Model\PlanetEditor.cs" />
+    <Compile Include="Source\Model\SiSuffix.cs" />
+    <Compile Include="Source\Model\SmaAligner.cs" />
+    <Compile Include="Source\View\AboutWindow.cs" />
+    <Compile Include="Source\View\CoreView.cs" />
+    <Compile Include="Source\View\LanderView.cs" />
+    <Compile Include="Source\View\MiscEditorView.cs" />
+    <Compile Include="Source\View\OrbitEditorView.cs" />
+    <Compile Include="Source\View\PlanetEditorView.cs" />
+    <Compile Include="Source\View\SmaAlignerView.cs" />
+    <Compile Include="Source\View\View.cs" />
+    <Compile Include="Source\View\Window.cs" />
+  -->
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="hex-icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if $(ConfigurationName) == Debug (
+  "G:\Utils\pdb2mdb\pdb2mdb.exe" "$(TargetFileName)"
+  xcopy /Y "$(TargetPath)" "G:\KSP131.dev\GameData\$(TargetName)\"
+  xcopy /Y "$(TargetDir)$(TargetName).pdb" "G:\KSP131.dev\GameData\$(TargetName)\"
+  xcopy /Y "$(TargetDir)$(TargetName).dll.mdb" "G:\KSP131.dev\GameData\$(TargetName)\"
+) else if $(ConfigurationName) == Release (
+  xcopy /Y "$(TargetPath)" "V:\KSP x64 1.4\GameData\$(TargetName)\"
+)</PostBuildEvent>
+  </PropertyGroup>
+</Project>

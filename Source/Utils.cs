@@ -95,7 +95,7 @@ namespace HyperEditX {
 
     /// <summary>
     /// Get destination latitude point for use with fine-tuning.
-    /// <para>See http://www.movable-type.co.uk/scripts/latlong.html</para>
+    /// <para>See http://www.movable-type.co.uk/scripts/latlong.html </para>
     /// <para>(Destination point given distance and bearing from start point)</para>
     /// </summary>
     /// <param name="latStart">The starting latitude</param>
@@ -106,7 +106,7 @@ namespace HyperEditX {
     /// <returns></returns>
     public static double DestinationLatitude(double latStart, double lonStart, double bearing, double distance, double radius) {
 
-      //distance = distance / 100; //this should equate to metres
+      distance = distance / 100; //this should equate to metres
       ALog("Bearing::", bearing);
 
       latStart = PI / 180 * latStart;
@@ -125,7 +125,7 @@ namespace HyperEditX {
 
     /// <summary>
     /// Get destination longitude point for use with fine-tuning.
-    /// <para>See http://www.movable-type.co.uk/scripts/latlong.html</para>
+    /// <para>See http://www.movable-type.co.uk/scripts/latlong.html </para>
     /// <para>(Destination point given distance and bearing from start point)</para>
     /// </summary>
     /// <param name="latStart">The starting latitude</param>
@@ -136,7 +136,7 @@ namespace HyperEditX {
     /// <returns></returns>
     public static double DestinationLongitude(double latStart, double lonStart, double bearing, double distance, double radius) {
 
-      //distance = distance / 100; //this should equate to metres
+      distance = distance / 100; //this should equate to metres
       ALog("Bearing::", bearing);
 
       latStart = PI / 180 * latStart;

@@ -406,41 +406,40 @@ namespace HyperEditX.Lander {
       }
 
       // 0.2 meters per frame
-      //var degrees = 0.02 / Body.Radius * (180 / Math.PI);
-
-      //Utils.Log("degrees = " + degrees);
-
+      //var degrees = Math.Round(0.02 / Body.Radius * (180 / Math.PI), 6);
+      var degrees = Math.Round(0.1 / Body.Radius * (180 / Math.PI), 6);
+      
       var changed = false;
       if ( GameSettings.TRANSLATE_UP.GetKey() ) {
         Utils.Log("UP (North)");
         Utils.Log("Lat Before: " + Latitude);
-        Latitude = Utils.DestinationLatitude(Latitude, Longitude, 0, distance, Body.Radius);
-        //Latitude -= degrees;
-        Utils.Log("Lat After: " + Latitude);
+        
+        Latitude -= degrees;
+        Utils.Log("Lat After : " + Latitude);
         changed = true;
       }
       if ( GameSettings.TRANSLATE_DOWN.GetKey() ) {
         Utils.Log("DOWN (South)");
         Utils.Log("Lat Before: " + Latitude);
-        Latitude = Utils.DestinationLatitude(Latitude, Longitude, 180, distance, Body.Radius);
-        //Latitude += degrees;
-        Utils.Log("Lat After: " + Latitude);
+        
+        Latitude += degrees;
+        Utils.Log("Lat After : " + Latitude);
         changed = true;
       }
       if ( GameSettings.TRANSLATE_LEFT.GetKey() ) {
         Utils.Log("LEFT (West)");
         Utils.Log("Lon Before: " + Longitude);
-        Longitude = Utils.DestinationLongitude(Latitude, Longitude, 270, distance, Body.Radius);
-        //Longitude -= degrees / Math.Cos(Latitude * (Math.PI / 180));
-        Utils.Log("Lon After: " + Longitude);
+
+        Longitude -= degrees;
+        Utils.Log("Lon After : " + Longitude);
         changed = true;
       }
       if ( GameSettings.TRANSLATE_RIGHT.GetKey() ) {
         Utils.Log("RIGHT (East)");
         Utils.Log("Lon Before: " + Longitude);
-        Longitude = Utils.DestinationLongitude(Latitude, Longitude, 90, distance, Body.Radius);
-        //Longitude += degrees / Math.Cos(Latitude * (Math.PI / 180));
-        Utils.Log("Lon After: " + Longitude);
+
+        Longitude += degrees;
+        Utils.Log("Lon After : " + Longitude);
         changed = true;
       }
 
@@ -451,8 +450,13 @@ namespace HyperEditX.Lander {
         Longitude = 0.0001;
       }
       if ( changed ) {
+        Utils.Log("degrees = " + degrees);
+
         AlreadyTeleported = false;
         teleportedToLandingAlt = false;
+
+        //Altitude = vessel.altitude; //see if this maintains the current altitude instead of resetting it?
+
         OnManualEdit(Latitude, Longitude, Altitude, Body);
 
         Utils.Log("Altitude = " + Altitude);

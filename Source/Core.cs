@@ -205,7 +205,7 @@ namespace HyperEditX {
       if ( _useAppLauncherButton == false )
         return;
       if ( _appLauncherButton != null ) {
-        Utils.Log("Not adding to ApplicationLauncher, button already exists (yet onGUIApplicationLauncherReady was called?)");
+        //Utils.Log("Not adding to ApplicationLauncher, button already exists.");
         return;
       }
       var applauncher = ApplicationLauncher.Instance;
